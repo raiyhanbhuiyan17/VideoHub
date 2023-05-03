@@ -4,10 +4,12 @@ import ReactPlayer from 'react-player';
 import { Box,Stack,Typography, CircularProgress } from '@mui/material';
 import { fetchFromAPI } from '../utils/fetchFromAPI';
 import { CheckCircle } from '@mui/icons-material';
+import { Videos} from "./";
 
 
 const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
+  const [videos,setVideos] = useState([]);
   const {id} =  useParams();
 
   const [loading, setLoading] = useState(true);
@@ -19,6 +21,8 @@ const VideoDetail = () => {
     // setDetail(data.items[0])
 
     //console.log(data)
+    fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
+      .then((data) => setVideos(data.items))
   },[id])
 
   if(!videoDetail?.snippet)return 'Loading...';
@@ -69,9 +73,12 @@ const VideoDetail = () => {
             </Stack>
           </Box>
         </Box>
+        <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems="center" >
+          <Videos videos={videos} direction="column" />
+      </Box>
 
       </Stack>
-
+    
     </Box>
   )
 }
