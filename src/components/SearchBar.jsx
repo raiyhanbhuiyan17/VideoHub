@@ -27,7 +27,7 @@ const SearchBar = () => {
         pl: 2,
         boxShadow: 'none',
         position:'center',
-        mr: { xs:5, sm: 10, md:20, lg:70},
+        mr: { xs:3, sm: 10, md:20, lg:70},
       
       }}
     >
